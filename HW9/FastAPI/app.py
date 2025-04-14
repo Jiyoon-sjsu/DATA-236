@@ -79,22 +79,3 @@ async def predict_score(data: ScoreInput):
     except Exception as e:
         print("Prediction error:", e)
         return {"error": str(e)}
-
-# Retrain endpoint
-@app.post("/train")
-async def retrain_model():
-    try:
-        new_model = train_model()
-        sample_input = np.array([[5, 90]])
-        sample_pred = new_model.predict(sample_input)[0]
-        return {
-            "message": "Model retrained successfully.",
-            "sample_prediction": {
-                "study_hours": 5,
-                "attendance": 90,
-                "predicted_score": round(sample_pred, 2)
-            }
-        }
-    except Exception as e:
-        print("Retrain error:", e)
-        return {"error": str(e)}
